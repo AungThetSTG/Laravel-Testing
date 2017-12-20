@@ -1,6 +1,5 @@
 <?php
-use App\User;
-use App\Post;
+use App\Login;
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -21,12 +20,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->faker = Faker::create();
+        
+        $this->persistAdmin();
+    }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        User::truncate();
-        Post::truncate();
-
-        factory(User::class, 10)->create();
-        factory(Post::class, 50)->create();
+    public function persistAdmin(){
+        DB::table('logins')->insert([
+            'email'     => 'admin@gmail.com',
+            'password'  => bcrypt('secretadmin'),
+            'role'      => 'admin',
+            'verified'  => '1'
+        ]);
     }
 }
