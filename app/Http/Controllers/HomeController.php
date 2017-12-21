@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $admin = Login::all()->where('role', 'teacher');
+        $admin = ((array)Login::all()->where('role', 'teacher'));
         return $admin;
     }
 }

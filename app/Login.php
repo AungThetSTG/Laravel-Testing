@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Login extends Authenticatable
+class Login extends Authenticatable 
 {
     use Notifiable;
 
@@ -28,12 +28,20 @@ class Login extends Authenticatable
         'verification_token',
     ];
 
+    // public function createObj(array $array){
+    //     $this::create($array);
+    // }
+
     public static function generateVerificationCode(){
         return str_random(40);
     }
 
     public function Teacher(){
-        $this->hasOne('App\Teacher');
+        return $this->hasOne('App\Teacher');
+    }
+
+    public function Student(){
+        return $this->hasOne('App\Student');
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 use App\Login;
 use App\Teacher;
+use App\Student;
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -24,10 +25,12 @@ class DatabaseSeeder extends Seeder
         
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Login::truncate();
+        Teacher::truncate();
 
         $this->persistAdmin();
-        factory(Login::class, 20)->create();
-        factory(Teacher::class, count(Login::all()->where('role', 'teacher')))->create();
+        
+        factory(Teacher::class, 5)->create();
+        factory(Student::class, 15)->create();
     }
 
     public function persistAdmin(){
