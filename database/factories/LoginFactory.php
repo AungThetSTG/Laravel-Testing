@@ -1,8 +1,8 @@
 <?php
-
+use App\Login;
 use Faker\Generator as Faker;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Login::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -15,7 +15,7 @@ $factory->define(Model::class, function (Faker $faker) {
                                                         Login::UNVERIFIED_USER
                                                     ]
                                                 ),
-        'verification_token'=> $verified = Login::VERIFIED_USER ? null : Login::generateVerificationCode(),
+        'verification_token'=> $verified == Login::VERIFIED_USER ? null : Login::generateVerificationCode(),
         'role'              => $faker->randomElement([Login::TEACHER, Login::STUDENT]),
     ];
 });

@@ -28,4 +28,12 @@ class Login extends Authenticatable
         'verification_token',
     ];
 
+    public static function generateVerificationCode(){
+        return str_random(40);
+    }
+
+    public function Teacher(){
+        $this->hasOne('App\Teacher');
+    }
+
 }
