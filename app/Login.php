@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Services\ObjCreator;
 
-class Login extends Authenticatable 
+class Login extends ObjCreator 
 {
     use Notifiable;
 
@@ -28,9 +29,9 @@ class Login extends Authenticatable
         'verification_token',
     ];
 
-    // public function createObj(array $array){
-    //     $this::create($array);
-    // }
+    public function createObj(array $array){
+        $this::create($array);
+    }
 
     public static function generateVerificationCode(){
         return str_random(40);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Login;
+use App\Teacher;
+use App\Services\ObjCreator;
 
 class HomeController extends Controller
 {
@@ -25,7 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $admin = ((array)Login::all()->where('role', 'teacher'));
-        return $admin;
+        $user = Teacher::all()->where('login_id', Auth::user()->id)->first();
+
+        return view('home')->with('user', $user);
     }
 }

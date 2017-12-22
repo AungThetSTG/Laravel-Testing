@@ -1,7 +1,10 @@
 <?php
     namespace App\Services;
 
-    interface ObjCreator{
-        public function createObj(array $array);
+    use Illuminate\Foundation\Auth\User as Authenticatable;
+
+    abstract class ObjCreator extends Authenticatable 
+    {
+        public abstract function createObj(array $array);
     }
 ?>

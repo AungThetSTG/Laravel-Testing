@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Services\ObjCreator;
 
-
-class Teacher extends Authenticatable 
+class Teacher extends ObjCreator 
 {
     protected $fillable = [
         'name',
@@ -17,7 +17,7 @@ class Teacher extends Authenticatable
         return $this->belongsTo('App\Login');
     }
 
-    // public function createObj(array $array){
-    //     return $this::create($array);
-    // }
+    public function createObj(array $array){
+        return $this::create($array);
+    }
 }
