@@ -1,7 +1,7 @@
 <?php
-use App\Login;
-use App\Teacher;
-use App\Student;
+use App\Models\Login;
+use App\Models\Teacher;
+use App\Models\Student;
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->persistAdmin();
         
         factory(Teacher::class, 5)->create();
-        factory(Student::class, 15)->create();
+        factory(Student::class, 5)->create();
     }
 
     public function persistAdmin(){

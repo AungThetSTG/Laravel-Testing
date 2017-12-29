@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Login;
-use App\Teacher;
+
+use App\Models\Login;
+use App\Models\Teacher;
 use App\Services\ObjCreator;
 
 class HomeController extends Controller
@@ -27,8 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Teacher::all()->where('login_id', Auth::user()->id)->first();
-
-        return view('home')->with('user', $user);
+        $user = Auth::user();
+        $activeUser = Auth::user()->role === 'admin' ? : $user->{$user->role};
+        $teacher = Teacher::paginate(2);
+        return view($user->role, ['user'=>$activeUser, 'teacher'=>$teacher]);
+        //return $teacher;
     }
 }

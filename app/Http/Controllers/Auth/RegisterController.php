@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Login;
-use App\Teacher;
+use App\Models\Login;
+use App\Services\ObjCreator;
+use App\Models\Teacher;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -21,58 +22,53 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-    
+
     use RegistersUsers;
-    
+
     /**
-    * Where to redirect users after registration.
-    *
-    * @var string
-    */
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
     protected $redirectTo = '/home';
-    
+    protected $lgs;
+
     /**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('guest');
+
     }
-    
+
     /**
-    * Get a validator for an incoming registration request.
-    *
-    * @param  array  $data
-    * @return \Illuminate\Contracts\Validation\Validator
-    */
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'name' => 'required',
             'role' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:logins',
             'password' => 'required|string|min:6|confirmed',
-            ]);
-        }
-        
-        /**
-        * Create a new user instance after a valid registration.
-        *
-        * @param  array  $data
-        * @return \App\Login
-        */
-        protected function create(array $data)
-        {
-            $teacher = Teacher::create([
-                'name' => 'teacher',
-                'login_id' => Login::create([
-                    'role' => $data['role'],
-                    'email' => $data['email'],
-                    'password' => bcrypt('secret'),
-                    ])->id
-                    ]);   
-            return $teacher->login;
-                }
-            }
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array $data
+     * @return \App\Models\Login
+     */
+    protected function create(array $data)
+    {
+        return (Teacher::createObj($data))->login;
+    }
+}
             

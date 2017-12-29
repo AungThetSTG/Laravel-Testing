@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Hello') }}
+                        <span style="font-size: 18px;">JLPT</span>
                     </a>
                 </div>
 
@@ -48,10 +48,15 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->email }} <span class="caret"></span>
+                                    {{ ucwords(Auth::user()->role) }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ route('teacher.create') }}">
+                                            Create
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

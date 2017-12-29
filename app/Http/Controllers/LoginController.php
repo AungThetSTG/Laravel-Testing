@@ -1,13 +1,1 @@
-<?php
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-class LoginController extends Controller
-{
-    //
-    function index(){
-        return view('auth.login');
-    }
-}
+<?phpnamespace App\Http\Controllers;use Illuminate\Http\Request;class LoginController extends Controller{    //    public function __construct()    {        $this->middleware('guest');    }    function index(){        return view('auth.login');    }}

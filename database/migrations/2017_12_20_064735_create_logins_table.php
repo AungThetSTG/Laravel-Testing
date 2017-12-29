@@ -1,5 +1,5 @@
 <?php
-use App\Login;
+use App\Models\Login;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
